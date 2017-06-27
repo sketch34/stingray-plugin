@@ -1,18 +1,18 @@
 // About
 //
-name = "Stingray Plugin"
-description = "Stingray Plugin Example"
+name = "Giphy JS"
+description = "Giphy Stringray Plugin Example"
 version = "1.0.0"
 changelog = {
     "1.0.0": "First version"
 }
 author = {
-    name = "Jonathan Schmidt"
-    email = "jonathan.schmidt@autodesk.com"
+    name = "Jarrod Smith"
+    email = "jarrod.smith@autodesk.com"
     company = "Autodesk Inc."
-    url = "https://git.autodesk.com/gameware/stingray-plugin"
+    url = "https://github.com/sketch34/stingray-plugin"
 }
-keywords = ["stingray", "plugin", "example"]
+keywords = ["stingray", "plugin", "example", "giphy"]
 
 // Define plugin thumbnail
 thumbnail = "sample_project/sample.svg"
@@ -33,17 +33,18 @@ extensions = {
         // Raised when the editor starts. Global events do not need the `for` keyword
         { on = "EditorStarted" do = ["example-on-editor-started"] }
 
-        // Raised when the current level changes. Use the `for` keywork when connection to a specific system or service.
+        // Raised when the current level changes. Use the `for` keyword when connecting to a specific system or service.
         { for = "level-editing-service" on = "CurrentLevelChanged" do = ["example-on-level-changed"] }
     ]
 
     // Define plugin views.
     views = [
-        { type = "panel" name = "example" path = "example-view" title = "Example View" }
+    	{ type = "panel" name = "giphy-viewer" path = "giphy-viewer" title = "Giphy Viewer" width = 725 height = 800 }
     ]
 
     // Define menu items to trigger actions, open views, etc..
     menus = [
+		{ path = "Window/Giphy" view = "giphy-viewer" order = 359 }
         { path = "Example" order = 12000 }
         { path = "Example/View" view = "example" order = 0 }
         { path = "Example/Editor Native Extension" action = "example-test-editor-native-extension" }
