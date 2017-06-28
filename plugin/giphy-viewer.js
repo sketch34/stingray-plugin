@@ -99,9 +99,16 @@ define(function (require) {
          * Import all the frames of the selected Giphy.
          */
         importFrames () {
-            // TODO
+            let selectedGiphy = _.first(this.giphyListView.getSelection());
+            if (!selectedGiphy)
+                return Promise.reject('No Giphy selection');
+            // Ask user where to save frames.
+            return hostService.getFolder('Select where to save frames...', stingray.env.userDownloadDir)
+                .then(folder => this.saveGiphy(selectedGiphy, folder))
+                .then(savedFilePath => this.extractFrames(savedFilePath))
+                .then(extractedFrameFilePaths => hostService.showInExplorer(extractedFrameFilePaths[0]))
+                .catch(err => console.error(err));
         }
-
         /**
          * Download the original Giphy file on disk.
          * @param giphy
@@ -109,16 +116,31 @@ define(function (require) {
          * @returns {*}
          */
         saveGiphy (giphy, folder) {
-            // TODO
+            if (!folder)
+                return Promise.reject('Invalid folder');
+            return giphyClient.download(giphy.id, giphy.url, folder);
         }
-
         /**
          * Call a C++ native function to extract all frames as png files.
          * @param filePath
          * @returns {*}
          */
         extractFrames (filePath) {
-           // TODO
+            // Dynamically load the native plugin DLL
+            const nativePluginDllPath = require.toUrl('binaries/editor/win64/dev/editor_plugin_w64_dev.dll');
+            if (!stingray.fs.exists(nativePluginDllPath))
+                throw new Error('Giphy editor native plugin does not exists at `' + nativePluginDllPath + '`. Was it compiled?');
+            let pluginId = stingray.loadNativeExtension(nativePluginDllPath);
+            
+            // Call our native function.
+            /** @namespace window.nativeGiphy */
+            // Looks like the following line on the C++ side maps to window.nativeGiphy on the JS side:
+            // api->register_native_function("nativeGiphy", "extractFrames", &extract_frames);
+            let paths = window.nativeGiphy.extractFrames(filePath);
+            
+            // We do not need the plugin anymore, let's dispose of it.
+            stingray.unloadNativeExtension(pluginId);
+            return paths;
         }
 
         /**
