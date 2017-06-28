@@ -16,7 +16,7 @@ node_modules/
 
 # Generated editor components
 
-plugin/*.js
+# plugin/*.js
 plugin/*.map
 
 # File patterns
