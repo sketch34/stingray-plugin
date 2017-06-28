@@ -2,7 +2,7 @@
 art_directory = ""
 data_directory = "../../build/sample_project_data"
 default_startup_level = "sample"
-description = "Create a sample project that demonstrates the usages of the Stingray plugin."
+description = "Create a sample project that demonstrates the usages of the Stingray Giphy plugin."
 libraries = {
 }
 migrations = {
@@ -35,8 +35,8 @@ migrations = {
 		version = "1.8.0"
 	}
 }
-name = "Project Sample"
+name = "Giphy - Stingray Project"
 reverse_forward_axis = true
 source_directory = "./"
-thumbnail = "sample.svg"
+thumbnail = "thumbnail.png"
 version = "1.9.0.0"

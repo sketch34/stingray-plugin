@@ -15,7 +15,7 @@ author = {
 keywords = ["stingray", "plugin", "example", "giphy"]
 
 // Define plugin thumbnail
-thumbnail = "sample_project/sample.svg"
+thumbnail = "sample_project/thumbnail.png"
 
 // Extensions
 //
@@ -63,6 +63,17 @@ extensions = {
     // Map plugin resources available for all projects.
     resources = [
         { path = "example_resources" }
+        // { path = "giphy_resources" }
+    ]
+
+    // Add an asset type to see GIF assets in the asset browser.
+    asset_types = [
+       { type = "gif" category = "Images" icon = "sample_project/thumbnail.png" }
+    ]
+
+    // Add an GIF importer.
+    imports = [
+        { types = ["gif"] label = "Giphy" do = [ { type = "js" module = "giphy-importer" function_name = "importGiphy" } ] }
     ]
 
     // Load the engine extension in the editor engine instance.

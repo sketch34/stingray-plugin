@@ -1,0 +1,50 @@
+
+android = {
+	output = {
+		format = "R8G8B8A8"
+	}
+}
+web = {
+	output = {
+		format = "DXT1"
+	}
+}
+win32 = {
+	output = {
+		format = "DXT1"
+	}
+}
+ps4 = {
+	output = {
+		format = "DXT1"
+	}
+}
+ios = {
+	output = {
+		format = "R8G8B8A8"
+	}
+}
+xb1 = {
+	output = {
+		format = "DXT1"
+	}
+}
+common = {
+	input = {
+		filename = "NnCumjsHychR6_50"
+	}
+	output = {
+		cut_alpha_threshold = 0.5
+		enable_cut_alpha_threshold = false
+		srgb = true
+		mipmap_filter = "box"
+		resident_mips = 0
+		mipmap_num_smallest_steps_to_discard = 0
+		apply_processing = true
+		mipmap_keep_original = false
+		category = "core/texture_categories/albedo"
+		mipmap_filter_wrap_mode = "mirror"
+		mipmap_num_largest_steps_to_discard = 0
+		streamable = false
+	}
+}
