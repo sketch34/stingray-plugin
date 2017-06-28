@@ -340,14 +340,10 @@ void units_spawned(CApiUnit **units, unsigned count)
 {
 	log->info(get_name(), error->eprintf("unit_spawned called %u", count));
 
-	#define _GTEST 1
-
-	#if _GTEST
+	#if _DEBUG
 		#define LOG_AND_CONTINUE(msg, ...) { log->warning(RESOURCE_EXTENSION, error->eprintf(msg, ##__VA_ARGS__)); continue; }
-		#define LOG_INFO(msg, ...) { log->info(RESOURCE_EXTENSION, error->eprintf(msg, ##__VA_ARGS__)); }
 	#else
 		#define LOG_AND_CONTINUE(msg, ...) { continue;  }
-		#define LOG_INFO(msg, ...)
 	#endif
 
 	for (unsigned i = 0; i < count; ++i) {
@@ -363,22 +359,14 @@ void units_spawned(CApiUnit **units, unsigned count)
 		const auto material_slot_name_indice = "giphy_material_slot_name";
 
 		// Do not continue if this unit does not have any Giphy resource.
-		if (!stingray::Data->Unit->has_data(unit_ref, 1, giphy_resource_indice)) {
+		if (!stingray::Data->Unit->has_data(unit_ref, 1, giphy_resource_indice))
 			continue;
-		}
-		else {
-			LOG_INFO("Found giphy resource for unit: %u", giphy_resource_indice);
-		}
 
 		// Make sure the unit has all the data we need to display a Giphy on it.
 		if (stingray::Unit->num_meshes(unit_ref) == 0 ||
 			!stingray::Data->Unit->has_data(unit_ref, 1, mesh_index_indice) ||
-			!stingray::Data->Unit->has_data(unit_ref, 1, material_slot_name_indice)) {
+			!stingray::Data->Unit->has_data(unit_ref, 1, material_slot_name_indice))
 			LOG_AND_CONTINUE("Unit #ID[%016llx] is missing Giphy property script data.", unit_resource_name);
-		}
-		else {
-			LOG_INFO("Unit #ID[%016llx] found Giphy property script data.", unit_resource_name);
-		}
 
 		// Get script data values
 		auto giphy_mesh_index = (unsigned)*(float*)stingray::Data->Unit->get_data(unit_ref, 1, mesh_index_indice).pointer;
@@ -390,12 +378,8 @@ void units_spawned(CApiUnit **units, unsigned count)
 			LOG_AND_CONTINUE("Unit #ID[%016llx] has an invalid material slot name", unit_resource_name);
 
 		// Make sure we can load the Giphy resource.
-		if (!resource_manager->can_get(RESOURCE_EXTENSION, giphy_resource_name)) {
+		if (!resource_manager->can_get(RESOURCE_EXTENSION, giphy_resource_name))
 			LOG_AND_CONTINUE("Cannot get unit #ID[%016llx] giphy resource", unit_resource_name);
-		}
-		else {
-			log->info(get_name(), error->eprintf("got giphy resource %s for unit #ID[%016llx]", giphy_resource_name, unit_resource_name));
-		}
 
 		// Get the unit mesh reference on which to display the Giphy.
 		auto unit_mesh = stingray::Unit->mesh(unit_ref, giphy_mesh_index, nullptr);
@@ -411,12 +395,8 @@ void units_spawned(CApiUnit **units, unsigned count)
 		// Load GIF image data.
 		int width = 0, height = 0, frames = 0;
 		auto gif_frames_data = gif_load_frames((stbi_uc*)gif_resource_data, gif_data_len, &width, &height, &frames);
-		if (gif_frames_data == nullptr) {
+		if (gif_frames_data == nullptr)
 			LOG_AND_CONTINUE("Cannot parse unit #ID[%016llx] giphy resource data", unit_resource_name);
-		}
-		else {
-			log->info(get_name(), error->eprintf("got giphy resource data for #ID[%016llx]", unit_resource_name));
-		}
 
 		// Create texture buffer view
 		RB_TextureBufferView texture_buffer_view;
