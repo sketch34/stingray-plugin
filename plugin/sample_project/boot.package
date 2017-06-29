@@ -19,7 +19,7 @@ unit = [
 	"core/editor_slave/units/skydome/skydome"
 	"core/units/camera"
 	"core/appkit/units/*"
-	"giphy_resources/*"
+	"giphy_resources/giphy_tv"
     "core/appkit/units/camera/camera"
     "core/editor_slave/units/skydome/skydome"
     "core/fallback_resources/missing_unit/*"
@@ -43,5 +43,5 @@ material = [
 ]
 gif = [
 	"gifs/*", 
-	"giphy_resources/*"
+	"giphy_resources/NnCumjsHychR6"
 ]

@@ -62,7 +62,6 @@ extensions = {
 
     // Map plugin resources available for all projects.
     resources = [
-        { path = "example_resources" }
         { path = "giphy_resources" }
     ]
 
