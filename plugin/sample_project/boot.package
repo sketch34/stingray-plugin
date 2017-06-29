@@ -1,14 +1,28 @@
+//"*" = [
+//	"*"
+//]
 
-"*" = [
-	"*"
+level = [
+    "sample"
+]
+physics_properties = [
+	"global"
 ]
 lua = [
 	"core/appkit/lua/*"
+	"core/wwise/lua/*"
+	"core/humanik/lua/*"
+    "core/scaleform_studio/lua/scaleform_studio_flow_callbacks"
+    "app"
 ]
 unit = [
 	"core/editor_slave/units/skydome/skydome"
 	"core/units/camera"
 	"core/appkit/units/*"
+	"giphy_resources/*"
+    "core/appkit/units/camera/camera"
+    "core/editor_slave/units/skydome/skydome"
+    "core/fallback_resources/missing_unit/*"
 ]
 shading_environment = [
 	"core/stingray_renderer/environments/midday/midday"
@@ -18,12 +32,14 @@ font = [
 ]
 ADD_PACKAGES = [
 	"gwnav/boot.package"
+	"core/animation/boot.package"
 ]
 config = [
 	"core/performance_hud/performance_hud"
 ]
 material = [
 	"core/performance_hud/*"
+	"giphy_resources/*"
 ]
 gif = [
 	"gifs/*", 

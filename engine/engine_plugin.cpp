@@ -349,7 +349,7 @@ void units_spawned(CApiUnit **units, unsigned count)
 	for (unsigned i = 0; i < count; ++i) {
 		auto unit_ref = unit->reference(units[i]);
 
-		#if _GTEST
+		#if _DEBUG
 			auto unit_resource_name = unit->unit_resource_name(units[i]);
 		#endif
 
